@@ -60,4 +60,4 @@ export default class Status {
         });
     }}
 
-//# sourceMappingURL=status.js.map
+//# sourceMappingURL=index.js.map

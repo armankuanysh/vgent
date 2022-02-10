@@ -1,9 +1,11 @@
 import { readFile } from 'fs/promises'
 import Chalk from 'chalk'
-import Logs from 'utils/logs'
+import { IStatus } from 'types/status'
+import { IConfig } from 'types/config'
+import { IAlerts } from 'types/alerts'
 
-export default class Status {
-  constructor(private chalk: typeof Chalk, private logs: Logs) {}
+export default class Status implements IStatus {
+  constructor(private chalk: typeof Chalk, private alerts: IAlerts) {}
 
   async checkNuxt(): Promise<boolean> {
     try {
@@ -19,31 +21,30 @@ export default class Status {
         console.log(this.chalk.green(`nuxt ${packageJson.dependencies.nuxt}`))
         return true
       } else {
-        this.logs.cantFindNuxt()
+        this.alerts.cantFindNuxt()
         return false
       }
     } catch (e) {
       if (e.code === 'ENOENT') {
-        this.logs.cantFindNuxt()
+        this.alerts.cantFindNuxt()
       }
     }
   }
 
-  async checkConfig() {
+  async checkConfig(): Promise<IConfig> {
     try {
       const file = await readFile(process.cwd() + '/.nxrc', {
         encoding: 'utf8',
       })
-      console.log('file', file)
+      const projectConfig: IConfig = JSON.parse(file)
+      if (projectConfig) {
+        return projectConfig
+      } else {
+        this.alerts.invalidProjectConfig()
+      }
     } catch (e) {
       if (e.code === 'ENOENT') {
-        console.error(
-          `Can't find ${this.chalk.green(
-            '.nxrc'
-          )} configuration file.\nRun 'touch ${this.chalk.green(
-            '.nxrc'
-          )} and provide some configurations.`
-        )
+        this.alerts.cantFindProjectConfig()
       }
     }
   }
