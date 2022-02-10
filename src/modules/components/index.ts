@@ -1,12 +1,12 @@
 import Core from 'modules/core/index.js'
-import Logs from 'utils/logs'
+import { IAlerts } from 'types/alerts'
 
 export default class Components extends Core {
-  constructor(private logs: Logs) {
+  constructor(private alerts: IAlerts) {
     super()
   }
   generate() {
     if (Core.isNuxtProject) console.log('generating component')
-    else this.logs.cantFindNuxt()
+    else this.alerts.cantFindNuxt()
   }
 }
