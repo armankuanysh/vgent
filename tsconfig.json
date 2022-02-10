@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "module": "ESNext",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "es6",
+    "noImplicitAny": true,
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "allowJs": true,
+    "outDir": "./dist",
+    "baseUrl": ".",
+    "paths": {
+      "types/*": ["./src/types/*"],
+      "context/*": ["./src/context/*"],
+      "modules/*": ["./src/modules/*"],
+      "services/*": ["./src/services/*"],
+      "utils/*": ["./src/utils/*"]
+    },
+    "plugins": [
+      {
+        "transform": "typescript-transform-paths",
+        "afterDeclarations": true
+      }
+    ],
+    "types": ["@types/node", "@types/yargs"],
+    "typeRoots": ["./src/types/*"]
+  },
+  "exclude": ["node_modules", "./dist/**/*"]
+}

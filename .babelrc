@@ -1,0 +1,23 @@
+{
+  "compact": false,
+  "retainLines": true,
+  "minified": false,
+  "inputSourceMap": false,
+  "sourceMaps": false,
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "root": ["./dist"],
+        "alias": {
+          "@": "./dist",
+          "types": "./dist/src/types",
+          "context": "./dist/src/context",
+          "modules": "./dist/src/modules",
+          "services": "./dist/src/services",
+          "utils": "./dist/src/utils"
+        }
+      }
+    ]
+  ]
+}
