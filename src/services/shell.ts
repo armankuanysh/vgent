@@ -2,8 +2,9 @@ import Chalk from 'chalk'
 import Yargs, { Options } from 'yargs'
 import { ICommands } from 'types/commands'
 import { options } from './options.js'
+import { IShell } from 'types/shell'
 
-export default class Shell {
+export default class Shell implements IShell {
   constructor(
     private yargs: typeof Yargs,
     private chalk: typeof Chalk,
