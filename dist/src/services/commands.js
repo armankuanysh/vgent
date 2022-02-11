@@ -7,7 +7,6 @@ var __awaiter = this && this.__awaiter || function (thisArg, _arguments, P, gene
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import Core from "../modules/core/index.js";
 export default class Commands {
     constructor(status, generateComponents) {
         this.status = status;
@@ -15,9 +14,8 @@ export default class Commands {
     }
     health() {
         return __awaiter(this, void 0, void 0, function* () {
-            const isNuxtProject = yield this.status.checkNuxt();
-            if (isNuxtProject) {
-                Core.isNuxtProject = isNuxtProject;
+            yield this.status.checkNuxt();
+            if (this.status.isNuxtApp) {
                 yield this.status.checkConfig();
             }
         });
