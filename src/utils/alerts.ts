@@ -6,7 +6,7 @@ export default class Alerts implements IAlerts {
 
   cantFindNuxt() {
     console.error(
-      `‼️ : Can't find ${this.chalk.green(
+      `Can't find ${this.chalk.green(
         'nuxt'
       )}. Is this project on ${this.chalk.green('Nuxt.js')}?`
     )

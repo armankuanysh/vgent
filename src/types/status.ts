@@ -1,6 +1,6 @@
 import { IConfig } from 'types/config'
 
 export interface IStatus {
-  checkNuxt(): Promise<boolean>
+  checkNuxt(): Promise<void>
   checkConfig(): Promise<IConfig>
 }

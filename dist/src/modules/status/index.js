@@ -12,6 +12,13 @@ export default class Status {
     constructor(chalk, alerts) {
         this.chalk = chalk;
         this.alerts = alerts;
+        this._isNuxtApp = false;
+    }
+    get isNuxtApp() {
+        return this._isNuxtApp;
+    }
+    set isNuxtApp(status) {
+        this._isNuxtApp = status;
     }
     checkNuxt() {
         return __awaiter(this, void 0, void 0, function* () {
@@ -24,11 +31,11 @@ export default class Status {
                 packageJson.dependencies &&
                 packageJson.dependencies.nuxt) {
                     console.log(this.chalk.green(`nuxt ${packageJson.dependencies.nuxt}`));
-                    return true;
+                    this.isNuxtApp = true;
                 } else
                 {
                     this.alerts.cantFindNuxt();
-                    return false;
+                    this.isNuxtApp = false;
                 }
             }
             catch (e) {
