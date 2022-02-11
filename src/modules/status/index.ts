@@ -5,9 +5,19 @@ import { IConfig } from 'types/config'
 import { IAlerts } from 'types/alerts'
 
 export default class Status implements IStatus {
+  private _isNuxtApp = false
+
   constructor(private chalk: typeof Chalk, private alerts: IAlerts) {}
 
-  async checkNuxt(): Promise<boolean> {
+  get isNuxtApp(): boolean {
+    return this._isNuxtApp
+  }
+
+  set isNuxtApp(status: boolean) {
+    this._isNuxtApp = status
+  }
+
+  async checkNuxt(): Promise<void> {
     try {
       const packageJsonText = await readFile(process.cwd() + '/package.json', {
         encoding: 'utf8',
@@ -19,10 +29,10 @@ export default class Status implements IStatus {
         packageJson.dependencies.nuxt
       ) {
         console.log(this.chalk.green(`nuxt ${packageJson.dependencies.nuxt}`))
-        return true
+        this.isNuxtApp = true
       } else {
         this.alerts.cantFindNuxt()
-        return false
+        this.isNuxtApp = false
       }
     } catch (e) {
       if (e.code === 'ENOENT') {
