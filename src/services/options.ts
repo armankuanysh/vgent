@@ -1,6 +1,12 @@
 import { IOption } from 'types/options.js'
 
 export const options: IOption = {
+  q: {
+    alias: 'quickstart',
+    describe: 'Generate config file with default configuration',
+    type: 'boolean',
+    demandOption: false,
+  },
   c: {
     alias: 'component',
     describe: 'Generate component',

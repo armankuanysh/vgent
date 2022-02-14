@@ -1,5 +1,5 @@
 export interface ICommands {
-  health(): void
+  health(init?: boolean): void
   components(): void
-  init(): void
+  init(quickstart?: boolean): Promise<void>
 }
