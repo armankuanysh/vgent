@@ -10,6 +10,35 @@ export const options: IOption = {
   c: {
     alias: 'component',
     describe: 'Generate component',
+    type: 'string',
+    default: 'component' + Math.floor(Math.random() * 100),
+    demandOption: false,
+  },
+  a: {
+    alias: 'atoms',
+    describe:
+      'Generate an atom component. Used when Atomic Design option is enabled',
+    type: 'boolean',
+    demandOption: false,
+  },
+  m: {
+    alias: 'molecules',
+    describe:
+      'Generate a molecules component. Used when Atomic Design option is enabled',
+    type: 'boolean',
+    demandOption: false,
+  },
+  o: {
+    alias: 'organisms',
+    describe:
+      'Generate an organism component. Used when Atomic Design option is enabled',
+    type: 'boolean',
+    demandOption: false,
+  },
+  t: {
+    alias: 'templates',
+    describe:
+      'Generate a templates component. Used when Atomic Design option is enabled',
     type: 'boolean',
     demandOption: false,
   },

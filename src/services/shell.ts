@@ -3,6 +3,8 @@ import Yargs from 'yargs'
 import { ICommands } from 'types/commands'
 import { options } from './options.js'
 import { IShell } from 'types/shell'
+import { componentType } from 'types/generator.js'
+import { log } from 'console'
 
 export default class Shell implements IShell {
   constructor(
@@ -30,9 +32,15 @@ export default class Shell implements IShell {
         'make',
         'Used for some generations',
         () => {},
-        (options) => {
+        async (options) => {
           if (options.c) {
-            this.commands.components()
+            const name = options.c as string
+            const type = ((options.a && 'atoms') ||
+              (options.m && 'molecules') ||
+              (options.o && 'organisms') ||
+              (options.t && 'templates') ||
+              'atoms') as componentType
+            await this.commands.components(name, type)
           }
         }
       )
@@ -46,6 +54,10 @@ export default class Shell implements IShell {
       )
       .option('q', options['q'])
       .option('c', options['c'])
+      .option('a', options['a'])
+      .option('m', options['m'])
+      .option('o', options['o'])
+      .option('t', options['t'])
       .option('p', options['p'])
       .option('s', options['s'])
       .help(true).argv

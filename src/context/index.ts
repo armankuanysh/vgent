@@ -20,8 +20,8 @@ const logs = new Alerts(chalk)
 const status = new Status(chalk, logs)
 const settings = new Settings()
 const config = new Config(_inquirer, chalk, settings)
-const components = new Components(logs)
-const commands = new Commands(status, components, config)
+const components = new Components(logs, settings)
+const commands = new Commands(status, settings, components, config)
 const shell = new Shell(Yargs, chalk, commands)
 
 export default shell
