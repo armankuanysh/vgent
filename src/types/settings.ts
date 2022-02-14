@@ -5,4 +5,5 @@ export interface ISettings {
   setSrc(src: IConfig['src']): void
   setDir(dir: IConfig['dir']): void
   setComponents(components: IConfig['components']): void
+  readLocalConfig(): Promise<void>
 }

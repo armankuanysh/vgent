@@ -2,7 +2,7 @@ import { writeFile, readFile } from 'fs/promises'
 import { join } from 'path'
 import Chalk from 'chalk'
 import inquirer from 'inquirer'
-import { IConfig } from 'types/config'
+import { IConfig, scriptLang } from 'types/config'
 import { ISettings } from 'types/settings'
 
 export default class Config {
@@ -24,21 +24,61 @@ export default class Config {
         type: 'list',
         name: 'scriptLang',
         message: 'Language of scripts?',
-        choices: ['js', 'ts'],
+        choices: [
+          {
+            name: 'JavaScript',
+            value: 'js',
+          },
+          {
+            name: 'TypeScript',
+            value: 'ts',
+          },
+        ],
         default: () => this.config.config.components.scriptLang,
       },
-      optionsApi: {
-        type: 'confirm',
-        name: 'optionsApi',
-        message:
-          'Use options API in your typescript component or class components?',
-        default: () => this.config.config.components.optionsApi,
-      },
+      componentApi: (lang: scriptLang) => ({
+        type: 'list',
+        name: 'componentApi',
+        message: 'Choose script configuration:',
+        choices: [
+          {
+            name: 'Options API',
+            value: 'optionsApi',
+          },
+          {
+            name: 'Composition API',
+            value: 'compositionApi',
+          },
+          {
+            name: 'Class component',
+            value: 'class',
+            [lang === 'js' && 'disabled']: 'Unavailable on JS',
+          },
+        ],
+        default: () => this.config.config.components.componentApi,
+      }),
       styleLang: {
         type: 'list',
         name: 'styleLang',
         message: 'CSS preprocessor?',
-        choices: ['css', 'scss', 'sass', 'less'],
+        choices: [
+          {
+            name: 'CSS',
+            value: 'css',
+          },
+          {
+            name: 'SCSS',
+            value: 'scss',
+          },
+          {
+            name: 'SASS',
+            value: 'sass',
+          },
+          {
+            name: 'LESS',
+            value: 'less',
+          },
+        ],
         default: () => this.config.config.components.styleLang,
       },
       useIndex: {
@@ -85,12 +125,17 @@ export default class Config {
     ])
     answers.scriptLang = scriptLang
 
-    if (answers.scriptLang === 'ts') {
-      const { optionsApi } = await this.inquirer.prompt([
-        this.promtQuestions().optionsApi,
-      ])
-      answers.optionsApi = optionsApi
-    }
+    const { componentApi } = await this.inquirer.prompt([
+      this.promtQuestions().componentApi(scriptLang),
+    ])
+    answers.componentApi = componentApi
+
+    // if (answers.scriptLang === 'ts') {
+    //   const { optionsApi } = await this.inquirer.prompt([
+    //     this.promtQuestions().optionsApi,
+    //   ])
+    //   answers.optionsApi = optionsApi
+    // }
 
     const { styleLang } = await this.inquirer.prompt([
       this.promtQuestions().styleLang,

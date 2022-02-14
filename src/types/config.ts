@@ -1,5 +1,6 @@
 export type scriptLang = 'js' | 'ts'
 export type styleLang = 'css' | 'scss' | 'sass' | 'less'
+export type componentApi = 'optionsApi' | 'compositionApi' | 'class'
 
 export interface IDirOption {
   components?: string
@@ -14,7 +15,7 @@ export interface IComponentsOption {
   styleLang?: styleLang
   scriptLang?: scriptLang
   /** to use options API in components */
-  optionsApi?: boolean
+  componentApi?: componentApi
   /** to detach template, script, styles to separate files */
   detached?: boolean
   /** to use index files as component */

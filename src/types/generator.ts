@@ -1,3 +1,4 @@
+export type componentType = 'atoms' | 'molecules' | 'organisms' | 'templates'
 export interface IGenerator {
-  generate(): void
+  generate(name: string, type?: componentType): Promise<void>
 }
