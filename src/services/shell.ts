@@ -1,5 +1,5 @@
 import Chalk from 'chalk'
-import Yargs, { Options } from 'yargs'
+import Yargs from 'yargs'
 import { ICommands } from 'types/commands'
 import { options } from './options.js'
 import { IShell } from 'types/shell'
@@ -36,6 +36,15 @@ export default class Shell implements IShell {
           }
         }
       )
+      .command(
+        'init',
+        `Initialize ${this.chalk.green('nx')} in the project`,
+        () => {},
+        async (options) => {
+          await this.commands.init(options.q as boolean)
+        }
+      )
+      .option('q', options['q'])
       .option('c', options['c'])
       .option('p', options['p'])
       .option('s', options['s'])

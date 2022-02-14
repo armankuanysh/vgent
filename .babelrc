@@ -4,6 +4,16 @@
   "minified": false,
   "inputSourceMap": false,
   "sourceMaps": false,
+  "presets": [
+    [
+      "@babel/preset-env", {
+        "targets": {
+          "node": "14"
+        },
+        "modules": false
+      }
+    ]
+  ],
   "plugins": [
     [
       "module-resolver",
