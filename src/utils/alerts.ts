@@ -17,17 +17,17 @@ export default class Alerts implements IAlerts {
   cantFindProjectConfig() {
     console.error(
       `Can't find ${this.chalk.green(
-        '.nxrc'
-      )} configuration file.\nRun 'touch ${this.chalk.green(
-        '.nxrc'
-      )} and provide some configurations.`
+        '.vgentrc'
+      )} configuration file.\nRun ${this.chalk.green(
+        'vgent init'
+      )} and provide some configurations.\n`
     )
   }
 
   invalidProjectConfig() {
     console.error(
       `${this.chalk.red('Invalid config')}: seems ${this.chalk.green(
-        '.nxrc'
+        '.vgentrc'
       )} file has invalid options`
     )
   }

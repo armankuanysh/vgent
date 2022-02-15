@@ -59,7 +59,7 @@ export default class Status implements IStatus {
 
   async checkConfig(): Promise<IConfig> {
     try {
-      const file = await readFile(process.cwd() + '/.nxrc', {
+      const file = await readFile(process.cwd() + '/.vgentrc', {
         encoding: 'utf8',
       })
       const projectConfig: IConfig = JSON.parse(file)

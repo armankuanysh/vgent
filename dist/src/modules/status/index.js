@@ -49,7 +49,7 @@ export default class Status {
   }
   async checkConfig() {
     try {
-      const file = await readFile(process.cwd() + '/.nxrc', {
+      const file = await readFile(process.cwd() + '/.vgentrc', {
         encoding: 'utf8' });
 
       const projectConfig = JSON.parse(file);
