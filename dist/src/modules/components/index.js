@@ -1,20 +1,12 @@
 import { join, dirname } from 'path';
 import { writeFile, mkdir } from 'fs/promises';
 import Core from "../core/index.js";
-import { component } from "../templates/index.js";
+import { component } from "../templates/component.js";
 export default class Components extends Core {
-  constructor(alerts, settings) {
+  constructor(alerts, chalk, settings) {
     super(settings);
     this.alerts = alerts;
-  }
-  prepare() {
-    this.src = this.settings.config.src;
-    this.componentDir = this.settings.config.dir.components;
-    this.script = this.settings.config.components.scriptLang;
-    this.componentApi = this.settings.config.components.componentApi;
-    this.style = this.settings.config.components.styleLang;
-    this.index = this.settings.config.components.useIndex;
-    this.atomic = this.settings.config.components.atomicDesign;
+    this.chalk = chalk;
   }
   async generate(name, type) {
     try {
@@ -28,10 +20,10 @@ export default class Components extends Core {
         await mkdir(_dirname, { recursive: true });
       }
       await writeFile(path, boilerplate, { encoding: 'utf8' });
-      console.log(`The component ${indexed} has successfully generated!`);
+      console.log(`The component ${this.chalk.green(indexed)} has successfully generated!`);
     }
     catch (e) {
-      console.error(`Something went wrong while generation of the ${name} component`, e);
+      console.error(`Something went wrong while generation of the ${this.chalk.redBright(name)} component`, e);
     }
   }}
 

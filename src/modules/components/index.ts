@@ -5,29 +5,16 @@ import { IAlerts } from 'types/alerts'
 import { IConfig } from 'types/config'
 import { componentType, IGenerator } from 'types/generator'
 import { ISettings } from 'types/settings'
-import { component } from '../templates/index.js'
+import { component } from '../templates/component.js'
+import Chalk from 'chalk'
 
 export default class Components extends Core implements IGenerator {
-  private src: IConfig['src']
-  private componentDir: IConfig['dir']['components']
-  private script: IConfig['components']['scriptLang']
-  private componentApi: IConfig['components']['componentApi']
-  private style: IConfig['components']['styleLang']
-  private index: IConfig['components']['useIndex']
-  private atomic: IConfig['components']['atomicDesign']
-
-  constructor(private alerts: IAlerts, settings: ISettings) {
+  constructor(
+    private alerts: IAlerts,
+    private chalk: typeof Chalk,
+    settings: ISettings
+  ) {
     super(settings)
-  }
-
-  private prepare() {
-    this.src = this.settings.config.src
-    this.componentDir = this.settings.config.dir.components
-    this.script = this.settings.config.components.scriptLang
-    this.componentApi = this.settings.config.components.componentApi
-    this.style = this.settings.config.components.styleLang
-    this.index = this.settings.config.components.useIndex
-    this.atomic = this.settings.config.components.atomicDesign
   }
 
   async generate(name: string, type?: componentType) {
@@ -52,10 +39,14 @@ export default class Components extends Core implements IGenerator {
         await mkdir(_dirname, { recursive: true })
       }
       await writeFile(path, boilerplate, { encoding: 'utf8' })
-      console.log(`The component ${indexed} has successfully generated!`)
+      console.log(
+        `The component ${this.chalk.green(indexed)} has successfully generated!`
+      )
     } catch (e) {
       console.error(
-        `Something went wrong while generation of the ${name} component`,
+        `Something went wrong while generation of the ${this.chalk.redBright(
+          name
+        )} component`,
         e
       )
     }
