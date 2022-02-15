@@ -1,10 +1,9 @@
 import { options } from "./options.js";
 export default class Shell {
-  constructor(yargs, chalk, commands, alerts) {
+  constructor(yargs, chalk, commands) {
     this.yargs = yargs;
     this.chalk = chalk;
     this.commands = commands;
-    this.alerts = alerts;
   }
   bootstrap() {
     this.yargs(process.argv.slice(2)).

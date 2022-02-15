@@ -1,7 +1,9 @@
 import { access } from 'fs/promises';
+import inquirer from 'inquirer';
 export default class Core {
-  constructor(settings) {
+  constructor(settings, inquirer) {
     this.settings = settings;
+    this.inquirer = inquirer;
   }
   prepare() {
     this.src = this.settings.config.src;
@@ -25,6 +27,18 @@ export default class Core {
     catch {
       return false;
     }
+  }
+  async rewriteModule(path, name) {
+    const exists = await this.dirExists(path);
+    if (exists) {
+      const { rewrite } = await inquirer.prompt({
+        type: 'confirm',
+        name: 'rewrite',
+        message: `File ${name} is exist. Do you want to rewrite file?` });
+
+      return rewrite;
+    }
+    return true;
   }}
 
 Core.isNuxtProject = false;

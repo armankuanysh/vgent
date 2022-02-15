@@ -3,8 +3,8 @@ import { mkdir, writeFile } from 'fs/promises';
 import Core from "../core/index.js";
 import { component } from "../templates/component.js";
 export default class Pages extends Core {
-  constructor(chalk, settings) {
-    super(settings);
+  constructor(chalk, settings, inquirer) {
+    super(settings, inquirer);
     this.chalk = chalk;
   }
   pathToFile(name, type) {
@@ -22,13 +22,19 @@ export default class Pages extends Core {
       this.capitalize(name), this.componentApi, this.script, this.style);
       const indexed = this.pathToFile(name, type);
       const path = join(process.cwd(), this.src, this.pageDir, indexed);
-      const _dirname = dirname(path);
-      const exists = await this.dirExists(_dirname);
-      if (!exists) {
-        await mkdir(_dirname, { recursive: true });
+      const rewriteOrCreate = await this.rewriteModule(path, indexed);
+      if (rewriteOrCreate) {
+        const _dirname = dirname(path);
+        const exists = await this.dirExists(_dirname);
+        if (!exists) {
+          await mkdir(_dirname, { recursive: true });
+        }
+        await writeFile(path, boilerplate, { encoding: 'utf8' });
+        console.log(`The page ${this.chalk.green(indexed)} has successfully generated!`);
+      } else
+      {
+        return;
       }
-      await writeFile(path, boilerplate, { encoding: 'utf8' });
-      console.log(`The page ${this.chalk.green(indexed)} has successfully generated!`);
     }
     catch (e) {
       console.error(`Something went wrong while generation of the ${this.chalk.redBright(name)} page`, e);

@@ -19,9 +19,9 @@ const logs = new Alerts(chalk);
 const status = new Status(chalk, logs);
 const settings = new Settings();
 const config = new Config(_inquirer, chalk, settings);
-const components = new Components(logs, chalk, settings);
-const pages = new Pages(chalk, settings);
+const components = new Components(chalk, _inquirer, settings);
+const pages = new Pages(chalk, settings, inquirer);
 const commands = new Commands(status, settings, components, pages, config, logs);
-const shell = new Shell(Yargs, chalk, commands, logs);
+const shell = new Shell(Yargs, chalk, commands);
 export default shell;
 //# sourceMappingURL=index.js.map

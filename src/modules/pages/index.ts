@@ -5,10 +5,15 @@ import Core from 'modules/core/index.js'
 import { component } from 'modules/templates/component.js'
 import { IGenerator, pageType } from 'types/generator'
 import { ISettings } from 'types/settings'
+import inquirer from 'inquirer'
 
 export default class Pages extends Core implements IGenerator {
-  constructor(private chalk: typeof Chalk, settings: ISettings) {
-    super(settings)
+  constructor(
+    private chalk: typeof Chalk,
+    settings: ISettings,
+    inquirer: inquirer.Inquirer
+  ) {
+    super(settings, inquirer)
   }
 
   pathToFile(name: string, type: pageType) {
@@ -32,15 +37,20 @@ export default class Pages extends Core implements IGenerator {
       )
       const indexed = this.pathToFile(name, type)
       const path = join(process.cwd(), this.src, this.pageDir, indexed)
-      const _dirname = dirname(path)
-      const exists = await this.dirExists(_dirname)
-      if (!exists) {
-        await mkdir(_dirname, { recursive: true })
+      const rewriteOrCreate = await this.rewriteModule(path, indexed)
+      if (rewriteOrCreate) {
+        const _dirname = dirname(path)
+        const exists = await this.dirExists(_dirname)
+        if (!exists) {
+          await mkdir(_dirname, { recursive: true })
+        }
+        await writeFile(path, boilerplate, { encoding: 'utf8' })
+        console.log(
+          `The page ${this.chalk.green(indexed)} has successfully generated!`
+        )
+      } else {
+        return
       }
-      await writeFile(path, boilerplate, { encoding: 'utf8' })
-      console.log(
-        `The page ${this.chalk.green(indexed)} has successfully generated!`
-      )
     } catch (e) {
       console.error(
         `Something went wrong while generation of the ${this.chalk.redBright(
