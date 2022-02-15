@@ -1,5 +1,5 @@
 export interface IAlerts {
-  cantFindNuxt(): void
+  cantFindNuxtOrVue(): void
   cantFindProjectConfig(): void
   invalidProjectConfig(): void
 }

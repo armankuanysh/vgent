@@ -17,8 +17,8 @@ export default class Shell implements IShell {
     this.yargs(process.argv.slice(2))
       .usage(
         `Info: ${this.chalk.green(
-          'nx'
-        )} is boilerplate file generator for Nuxt.js`
+          'vgent'
+        )} is boilerplate file generator for Nuxt.js and Vue.js`
       )
       .command(
         'health',
@@ -46,7 +46,7 @@ export default class Shell implements IShell {
       )
       .command(
         'init',
-        `Initialize ${this.chalk.green('nx')} in the project`,
+        `Initialize ${this.chalk.green('vgent')} in the project`,
         () => {},
         async (options) => {
           await this.commands.init(options.q as boolean)

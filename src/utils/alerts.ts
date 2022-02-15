@@ -4,11 +4,13 @@ import { IAlerts } from 'types/alerts'
 export default class Alerts implements IAlerts {
   constructor(private chalk: typeof Chalk) {}
 
-  cantFindNuxt() {
+  cantFindNuxtOrVue() {
     console.error(
-      `Can't find ${this.chalk.green(
-        'nuxt'
-      )}. Is this project on ${this.chalk.green('Nuxt.js')}?`
+      `Can't find ${this.chalk.green('nuxt')} nor ${this.chalk.green(
+        'vue'
+      )} dependencies. Is this project on ${this.chalk.green(
+        'Nuxt.js'
+      )} or ${this.chalk.green('Vue.js')}?`
     )
   }
 

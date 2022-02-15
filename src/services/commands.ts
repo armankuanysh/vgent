@@ -12,7 +12,7 @@ export default class Commands implements ICommands {
     private configGenerator: Config
   ) {}
   async health(init?: boolean) {
-    await this.status.checkNuxt()
+    await this.status.checkNuxtOrVue()
     if (this.status.isNuxtApp && !init) {
       await this.status.checkConfig()
     }

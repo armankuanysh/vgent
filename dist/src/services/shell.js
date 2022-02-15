@@ -7,7 +7,7 @@ export default class Shell {
   }
   bootstrap() {
     this.yargs(process.argv.slice(2)).
-    usage(`Info: ${this.chalk.green('nx')} is boilerplate file generator for Nuxt.js`).
+    usage(`Info: ${this.chalk.green('vgent')} is boilerplate file generator for Nuxt.js and Vue.js`).
     command('health', 'Check project', () => {}, async () => {
       await this.commands.health();
     }).
@@ -22,7 +22,7 @@ export default class Shell {
         await this.commands.components(name, type);
       }
     }).
-    command('init', `Initialize ${this.chalk.green('nx')} in the project`, () => {}, async (options) => {
+    command('init', `Initialize ${this.chalk.green('vgent')} in the project`, () => {}, async (options) => {
       await this.commands.init(options.q);
     }).
     option('q', options['q']).

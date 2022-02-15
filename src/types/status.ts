@@ -2,6 +2,7 @@ import { IConfig } from 'types/config'
 
 export interface IStatus {
   isNuxtApp: boolean
-  checkNuxt(): Promise<void>
+  isVueApp: boolean
+  checkNuxtOrVue(): Promise<void>
   checkConfig(): Promise<IConfig>
 }
