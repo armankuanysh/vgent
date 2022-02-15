@@ -13,6 +13,36 @@ VGENT is a CLI tool that generates boilerplate files for components, pages. You 
 - choose the component saving option: `<component_name>.vue` or `<component_name>/index.vue`
 - enable Atomic Design methodology structure of the components directory
 
+## Installing
+
+```bash
+npm install --global vgent
+
+# or
+
+yarn global add vgent
+```
+
+If you want to use VGENT locally in your project, you can install it:
+
+```bash
+npm install --save-dev vgent
+
+# or
+
+yarn add --dev vgent
+```
+
+However, to use VGENT locally, you need always execute commands through `npx` or `yarn`
+
+```bash
+npx vgent init
+
+# or
+
+yarn vgent init
+```
+
 ## How to use
 
 **Note**: if your project doesn’t have Nuxt.js or Vue.js you can’t use this tool.
