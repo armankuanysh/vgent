@@ -1,17 +1,42 @@
 {
   "name": "vgent",
   "version": "1.0.0",
-  "description": "A CLI tool to generate files for nuxt and vue",
+  "description": "VGENT is a CLI tool that generates boilerplate files for components, pages in your Nuxt.js or Vue.js project.",
   "main": "dist/index.js",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/armankuanysh/vgent"
+  },
+  "bugs": {
+    "url": "https://github.com/armankuanysh/vgent/issues"
+  },
   "bin": {
     "vgent": "dist/index.js"
   },
   "author": "Arman Kuanysh <armankuanysh.e@gmail.com>",
+  "keywords": [
+    "command",
+    "prompt",
+    "cli",
+    "vue",
+    "vuejs",
+    "Vue.js",
+    "nuxt",
+    "nuxtjs",
+    "Nuxt.js",
+    "components",
+    "components boilerplate",
+    "vue components"
+  ],
   "license": "MIT",
-  "private": true,
   "type": "module",
   "scripts": {
-    "build": "ttsc && babel dist -d dist"
+    "build": "ttsc && babel dist -d dist",
+    "test": "echo \"No test specified\""
   },
   "devDependencies": {
     "@babel/cli": "^7.17.0",
