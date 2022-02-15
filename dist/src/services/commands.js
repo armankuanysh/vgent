@@ -6,7 +6,7 @@ export default class Commands {
     this.configGenerator = configGenerator;
   }
   async health(init) {
-    await this.status.checkNuxt();
+    await this.status.checkNuxtOrVue();
     if (this.status.isNuxtApp && !init) {
       await this.status.checkConfig();
     }

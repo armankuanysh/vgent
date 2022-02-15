@@ -4,6 +4,7 @@ export default class Status {
     this.chalk = chalk;
     this.alerts = alerts;
     this._isNuxtApp = false;
+    this._isVueApp = false;
   }
   get isNuxtApp() {
     return this._isNuxtApp;
@@ -11,7 +12,13 @@ export default class Status {
   set isNuxtApp(status) {
     this._isNuxtApp = status;
   }
-  async checkNuxt() {
+  get isVueApp() {
+    return this._isVueApp;
+  }
+  set isVueApp(status) {
+    this._isVueApp = status;
+  }
+  async checkNuxtOrVue() {
     try {
       const packageJsonText = await readFile(process.cwd() + '/package.json', {
         encoding: 'utf8' });
@@ -23,14 +30,20 @@ export default class Status {
         console.log(this.chalk.green(`nuxt ${packageJson.dependencies.nuxt}`));
         this.isNuxtApp = true;
       } else
+      if (packageJson &&
+      packageJson.dependencies &&
+      packageJson.dependencies.vue) {
+        console.log(this.chalk.green(`vue ${packageJson.dependencies.vue}`));
+        this.isVueApp = true;
+      } else
       {
-        this.alerts.cantFindNuxt();
+        this.alerts.cantFindNuxtOrVue();
         this.isNuxtApp = false;
       }
     }
     catch (e) {
       if (e.code === 'ENOENT') {
-        this.alerts.cantFindNuxt();
+        this.alerts.cantFindNuxtOrVue();
       }
     }
   }

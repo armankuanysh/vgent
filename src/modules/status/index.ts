@@ -6,6 +6,7 @@ import { IAlerts } from 'types/alerts'
 
 export default class Status implements IStatus {
   private _isNuxtApp = false
+  private _isVueApp = false
 
   constructor(private chalk: typeof Chalk, private alerts: IAlerts) {}
 
@@ -17,7 +18,15 @@ export default class Status implements IStatus {
     this._isNuxtApp = status
   }
 
-  async checkNuxt(): Promise<void> {
+  get isVueApp(): boolean {
+    return this._isVueApp
+  }
+
+  set isVueApp(status: boolean) {
+    this._isVueApp = status
+  }
+
+  async checkNuxtOrVue(): Promise<void> {
     try {
       const packageJsonText = await readFile(process.cwd() + '/package.json', {
         encoding: 'utf8',
@@ -30,13 +39,20 @@ export default class Status implements IStatus {
       ) {
         console.log(this.chalk.green(`nuxt ${packageJson.dependencies.nuxt}`))
         this.isNuxtApp = true
+      } else if (
+        packageJson &&
+        packageJson.dependencies &&
+        packageJson.dependencies.vue
+      ) {
+        console.log(this.chalk.green(`vue ${packageJson.dependencies.vue}`))
+        this.isVueApp = true
       } else {
-        this.alerts.cantFindNuxt()
+        this.alerts.cantFindNuxtOrVue()
         this.isNuxtApp = false
       }
     } catch (e) {
       if (e.code === 'ENOENT') {
-        this.alerts.cantFindNuxt()
+        this.alerts.cantFindNuxtOrVue()
       }
     }
   }
