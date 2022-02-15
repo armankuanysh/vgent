@@ -1,10 +1,10 @@
 {
-  "name": "nx",
+  "name": "vgent",
   "version": "1.0.0",
-  "description": "A CLI tool to generate files for nuxt",
+  "description": "A CLI tool to generate files for nuxt and vue",
   "main": "dist/index.js",
   "bin": {
-    "nx": "dist/index.js"
+    "vgent": "dist/index.js"
   },
   "author": "Arman Kuanysh <armankuanysh.e@gmail.com>",
   "license": "MIT",
