@@ -1,6 +1,6 @@
 {
   "name": "vgent",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "VGENT is a CLI tool that generates boilerplate files for components, pages in your Nuxt.js or Vue.js project.",
   "main": "dist/index.js",
   "files": [
