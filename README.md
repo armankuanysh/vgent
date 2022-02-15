@@ -1,7 +1,19 @@
-# NX
+![VGENT](/assets/vgent-github-cover.png)
 
-NX is a modern boilerplate generator for Nuxt.js
+---
 
-## Status
+## VGENT
 
-Development in progress... 
+VGENT – Vue Agent, that helps you to develop in a more effective way.
+
+VGENT is a CLI tool that generates boilerplate files for components, pages, store modules. You can easily customize the generator for your project:
+
+- provide directories, where to generate your modules, components, etc
+- choose the language of the component: JavaScript or TypeScript
+- choose which component API to use such as Options API, Composition API, or Class components
+- choose the component saving option: `<component_name>.vue` or `<component_name>/index.vue`
+- enable Atomic Design methodology structure of the components directory
+
+## Updates
+
+Development in progress...
