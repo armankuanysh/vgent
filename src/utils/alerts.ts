@@ -31,4 +31,15 @@ export default class Alerts implements IAlerts {
       )} file has invalid options`
     )
   }
+
+  initInstruction() {
+    console.log(
+      `To generate a component run: ${this.chalk.greenBright(
+        'vgent make -c <component_name>'
+      )}`,
+      `\nTo generate a page run: ${this.chalk.greenBright(
+        'vgent make -p <page_name>'
+      )}`
+    )
+  }
 }
