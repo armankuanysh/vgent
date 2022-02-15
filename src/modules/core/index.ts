@@ -1,4 +1,5 @@
 import { access } from 'fs/promises'
+import inquirer from 'inquirer'
 import { IConfig } from 'types/config'
 import { componentType, pageType } from 'types/generator'
 import { ISettings } from 'types/settings'
@@ -14,7 +15,10 @@ export default abstract class Core {
   protected componentIndex: IConfig['components']['useIndex']
   protected pageIndex: IConfig['pages']['useIndex']
   protected atomic: IConfig['components']['atomicDesign']
-  constructor(protected readonly settings: ISettings) {}
+  constructor(
+    protected readonly settings: ISettings,
+    protected inquirer: inquirer.Inquirer
+  ) {}
 
   protected prepare() {
     this.src = this.settings.config.src
@@ -41,5 +45,18 @@ export default abstract class Core {
     } catch {
       return false
     }
+  }
+
+  protected async rewriteModule(path: string, name: string) {
+    const exists = await this.dirExists(path)
+    if (exists) {
+      const { rewrite } = await inquirer.prompt({
+        type: 'confirm',
+        name: 'rewrite',
+        message: `File ${name} is exist. Do you want to rewrite file?`,
+      })
+      return rewrite
+    }
+    return true
   }
 }
