@@ -112,5 +112,5 @@ Arman Kuanysh – [@armankuanysh](https://github.com/armankuanysh)
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/armankuanysh/vgent/blob/develop/LICENSE)
+This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/armankuanysh/vgent/blob/main/LICENSE)
  file for details
