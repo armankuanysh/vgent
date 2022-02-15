@@ -7,7 +7,7 @@ export default class Commands {
   }
   async health(init) {
     await this.status.checkNuxtOrVue();
-    if (this.status.isNuxtApp && !init) {
+    if ((this.status.isNuxtApp || this.status.isVueApp) && !init) {
       await this.status.checkConfig();
     }
   }

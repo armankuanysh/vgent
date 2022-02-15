@@ -31,7 +31,7 @@ export default class Settings {
   }
   async readLocalConfig() {
     try {
-      const file = await readFile(join(process.cwd(), '/.nxrc'), {
+      const file = await readFile(join(process.cwd(), '/.vgentrc'), {
         encoding: 'utf8' });
 
       const config = JSON.parse(file);

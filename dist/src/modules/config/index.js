@@ -91,10 +91,10 @@ export default class Config {
   }
   async generateDefaultConfig(content) {
     try {
-      await writeFile(join(process.cwd(), '.nxrc'), content, {
+      await writeFile(join(process.cwd(), '.vgentrc'), content, {
         encoding: 'utf8' });
 
-      console.log(`${this.chalk.green('.nxrc')} configuration file has been generated`);
+      console.log(`${this.chalk.green('.vgentrc')} configuration file has been generated`);
       console.log(`Now you can generate your components`);
     }
     catch (e) {
