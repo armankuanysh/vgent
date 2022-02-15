@@ -20,6 +20,9 @@ export default class Settings implements ISettings {
       detached: false,
       useIndex: true,
     },
+    pages: {
+      useIndex: true,
+    },
   }
 
   setSrc(src: IConfig['src']) {
@@ -34,6 +37,10 @@ export default class Settings implements ISettings {
     this.config.components = { ...this.config.components, ...components }
   }
 
+  setPages(pages: IConfig['pages']) {
+    this.config.pages = { ...this.config.pages, ...pages }
+  }
+
   async readLocalConfig() {
     try {
       const file = await readFile(join(process.cwd(), '/.vgentrc'), {
@@ -43,6 +50,7 @@ export default class Settings implements ISettings {
       this.setSrc(config.src)
       this.setDir(config.dir)
       this.setComponents(config.components)
+      this.setPages(config.pages)
     } catch (e) {
       console.error(e)
     }

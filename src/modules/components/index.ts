@@ -17,6 +17,10 @@ export default class Components extends Core implements IGenerator {
     super(settings)
   }
 
+  pathToFile(name: string) {
+    return this.componentIndex ? `${name}/index.vue` : `${name}.vue`
+  }
+
   async generate(name: string, type?: componentType) {
     try {
       this.prepare()
@@ -26,7 +30,7 @@ export default class Components extends Core implements IGenerator {
         this.script,
         this.style
       )
-      const indexed = this.index ? `${name}/index.vue` : `${name}.vue`
+      const indexed = this.pathToFile(name)
       const path = join(
         process.cwd(),
         this.src,

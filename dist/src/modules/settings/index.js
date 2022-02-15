@@ -16,6 +16,9 @@ export default class Settings {
         scriptLang: 'js',
         componentApi: 'optionsApi',
         detached: false,
+        useIndex: true },
+
+      pages: {
         useIndex: true } };
 
 
@@ -29,6 +32,9 @@ export default class Settings {
   setComponents(components) {
     this.config.components = { ...this.config.components, ...components };
   }
+  setPages(pages) {
+    this.config.pages = { ...this.config.pages, ...pages };
+  }
   async readLocalConfig() {
     try {
       const file = await readFile(join(process.cwd(), '/.vgentrc'), {
@@ -38,6 +44,7 @@ export default class Settings {
       this.setSrc(config.src);
       this.setDir(config.dir);
       this.setComponents(config.components);
+      this.setPages(config.pages);
     }
     catch (e) {
       console.error(e);

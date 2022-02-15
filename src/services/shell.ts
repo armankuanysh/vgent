@@ -3,7 +3,7 @@ import Yargs from 'yargs'
 import { ICommands } from 'types/commands'
 import { options } from './options.js'
 import { IShell } from 'types/shell'
-import { componentType } from 'types/generator.js'
+import { componentType, pageType } from 'types/generator.js'
 import { log } from 'console'
 
 export default class Shell implements IShell {
@@ -42,6 +42,13 @@ export default class Shell implements IShell {
               'atoms') as componentType
             await this.commands.components(name, type)
           }
+          if (options.p) {
+            const name = options.p as string
+            const type = ((options.slug && 'slug') ||
+              (options.id && 'id') ||
+              'index') as pageType
+            await this.commands.pages(name, type)
+          }
         }
       )
       .command(
@@ -59,6 +66,8 @@ export default class Shell implements IShell {
       .option('o', options['o'])
       .option('t', options['t'])
       .option('p', options['p'])
+      .option('slug', options['slug'])
+      .option('id', options['id'])
       .option('s', options['s'])
       .help(true).argv
   }

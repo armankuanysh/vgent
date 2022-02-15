@@ -5,6 +5,7 @@ import inquirer from 'inquirer'
 /** modules */
 import Status from 'modules/status/index.js'
 import Components from 'modules/components/index.js'
+import Pages from 'modules/pages/index.js'
 import Settings from 'modules/settings/index.js'
 import Config from 'modules/config/index.js'
 /** services */
@@ -21,7 +22,8 @@ const status = new Status(chalk, logs)
 const settings = new Settings()
 const config = new Config(_inquirer, chalk, settings)
 const components = new Components(logs, chalk, settings)
-const commands = new Commands(status, settings, components, config)
+const pages = new Pages(chalk, settings)
+const commands = new Commands(status, settings, components, pages, config)
 const shell = new Shell(Yargs, chalk, commands)
 
 export default shell
