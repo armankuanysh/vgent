@@ -11,13 +11,25 @@ export default class Config {
       src: {
         type: 'input',
         name: 'src',
-        message: 'Root of your project?',
+        message: 'The root directory of your project?',
         default: () => this.config.config.src },
+
+      componentsDir: (src) => ({
+        type: 'input',
+        name: 'componentsDir',
+        message: `The root directory of the components: ${src}`,
+        default: () => this.config.config.dir.components }),
+
+      pagesDir: (src) => ({
+        type: 'input',
+        name: 'pagesDir',
+        message: `The root directory of the pages: ${src}`,
+        default: () => this.config.config.dir.pages }),
 
       scriptLang: {
         type: 'list',
         name: 'scriptLang',
-        message: 'Language of scripts?',
+        message: 'The language of scripts?',
         choices: [
         {
           name: 'JavaScript',
@@ -104,6 +116,13 @@ export default class Config {
   async setSrc() {
     const { src } = await this.inquirer.prompt([this.promtQuestions().src]);
     this.config.setSrc(src);
+    const { componentsDir } = await this.inquirer.prompt([
+    this.promtQuestions().componentsDir(src)]);
+
+    const { pagesDir } = await this.inquirer.prompt([
+    this.promtQuestions().pagesDir(src)]);
+
+    this.config.setDir({ pages: pagesDir, components: componentsDir });
   }
   async setComponents() {
     const answers = {};
@@ -129,6 +148,7 @@ export default class Config {
     this.promtQuestions().useIndex]);
 
     answers.useIndex = useIndex || false;
+    this.config.setPages({ useIndex });
     const { atomicDesign } = await this.inquirer.prompt([
     this.promtQuestions().atomicDesign]);
 
