@@ -11,7 +11,6 @@ export const options: IOption = {
     alias: 'component',
     describe: 'Generate component',
     type: 'string',
-    default: 'component' + Math.floor(Math.random() * 100),
     demandOption: false,
   },
   a: {
@@ -45,6 +44,16 @@ export const options: IOption = {
   p: {
     alias: 'page',
     describe: 'Generate page component',
+    type: 'string',
+    demandOption: false,
+  },
+  slug: {
+    describe: 'Slug type of the page',
+    type: 'boolean',
+    demandOption: false,
+  },
+  id: {
+    describe: 'ID type of the page',
     type: 'boolean',
     demandOption: false,
   },

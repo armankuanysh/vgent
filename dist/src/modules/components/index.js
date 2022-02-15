@@ -8,11 +8,14 @@ export default class Components extends Core {
     this.alerts = alerts;
     this.chalk = chalk;
   }
+  pathToFile(name) {
+    return this.componentIndex ? `${name}/index.vue` : `${name}.vue`;
+  }
   async generate(name, type) {
     try {
       this.prepare();
       const boilerplate = component(name, this.componentApi, this.script, this.style);
-      const indexed = this.index ? `${name}/index.vue` : `${name}.vue`;
+      const indexed = this.pathToFile(name);
       const path = join(process.cwd(), this.src, this.componentDir, this.atomic ? `${type}/${indexed}` : indexed);
       const _dirname = dirname(path);
       const exists = await this.dirExists(_dirname);

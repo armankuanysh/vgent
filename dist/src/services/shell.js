@@ -21,6 +21,13 @@ export default class Shell {
         'atoms';
         await this.commands.components(name, type);
       }
+      if (options.p) {
+        const name = options.p;
+        const type = options.slug && 'slug' ||
+        options.id && 'id' ||
+        'index';
+        await this.commands.pages(name, type);
+      }
     }).
     command('init', `Initialize ${this.chalk.green('vgent')} in the project`, () => {}, async (options) => {
       await this.commands.init(options.q);
@@ -32,6 +39,8 @@ export default class Shell {
     option('o', options['o']).
     option('t', options['t']).
     option('p', options['p']).
+    option('slug', options['slug']).
+    option('id', options['id']).
     option('s', options['s']).
     help(true).argv;
   }}

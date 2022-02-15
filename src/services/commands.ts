@@ -1,7 +1,7 @@
 import Config from 'modules/config'
 import { ICommands } from 'types/commands'
 import { IStatus } from 'types/status'
-import { componentType, IGenerator } from 'types/generator'
+import { componentType, IGenerator, pageType } from 'types/generator'
 import { ISettings } from 'types/settings'
 
 export default class Commands implements ICommands {
@@ -9,6 +9,7 @@ export default class Commands implements ICommands {
     private status: IStatus,
     private settings: ISettings,
     private generateComponents: IGenerator,
+    private generatePages: IGenerator,
     private configGenerator: Config
   ) {}
   async health(init?: boolean) {
@@ -21,6 +22,11 @@ export default class Commands implements ICommands {
     await this.health()
     await this.settings.readLocalConfig()
     await this.generateComponents.generate(name, type)
+  }
+  async pages(name: string, type?: pageType) {
+    await this.health()
+    await this.settings.readLocalConfig()
+    await this.generatePages.generate(name, type)
   }
   async init(quickstart?: boolean) {
     await this.health(true)

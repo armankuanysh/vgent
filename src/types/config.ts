@@ -22,8 +22,13 @@ export interface IComponentsOption {
   useIndex?: boolean
 }
 
+export interface IPagesOption {
+  useIndex?: boolean
+}
+
 export interface IConfig {
   src?: string
   dir?: IDirOption
   components?: IComponentsOption
+  pages?: IPagesOption
 }

@@ -1,8 +1,9 @@
 export default class Commands {
-  constructor(status, settings, generateComponents, configGenerator) {
+  constructor(status, settings, generateComponents, generatePages, configGenerator) {
     this.status = status;
     this.settings = settings;
     this.generateComponents = generateComponents;
+    this.generatePages = generatePages;
     this.configGenerator = configGenerator;
   }
   async health(init) {
@@ -15,6 +16,11 @@ export default class Commands {
     await this.health();
     await this.settings.readLocalConfig();
     await this.generateComponents.generate(name, type);
+  }
+  async pages(name, type) {
+    await this.health();
+    await this.settings.readLocalConfig();
+    await this.generatePages.generate(name, type);
   }
   async init(quickstart) {
     await this.health(true);
