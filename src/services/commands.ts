@@ -3,6 +3,7 @@ import { ICommands } from 'types/commands'
 import { IStatus } from 'types/status'
 import { componentType, IGenerator, pageType } from 'types/generator'
 import { ISettings } from 'types/settings'
+import { IAlerts } from 'types/alerts'
 
 export default class Commands implements ICommands {
   constructor(
@@ -10,7 +11,8 @@ export default class Commands implements ICommands {
     private settings: ISettings,
     private generateComponents: IGenerator,
     private generatePages: IGenerator,
-    private configGenerator: Config
+    private configGenerator: Config,
+    private alerts: IAlerts
   ) {}
   async health(init?: boolean) {
     await this.status.checkNuxtOrVue()
@@ -34,6 +36,13 @@ export default class Commands implements ICommands {
       this.configGenerator.quickstart()
     } else {
       await this.configGenerator.promtUser()
+    }
+  }
+  async placeholder() {
+    await this.health()
+
+    if (this.status.isNuxtApp || this.status.isVueApp) {
+      this.alerts.initInstruction()
     }
   }
 }

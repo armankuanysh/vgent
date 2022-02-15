@@ -5,4 +5,5 @@ export interface ICommands {
   components(name: string, type?: componentType): void
   pages(name: string, type?: pageType): void
   init(quickstart?: boolean): Promise<void>
+  placeholder(): Promise<void>
 }

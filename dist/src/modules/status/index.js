@@ -28,17 +28,18 @@ export default class Status {
       packageJson.dependencies &&
       packageJson.dependencies.nuxt) {
         console.log(this.chalk.green(`nuxt ${packageJson.dependencies.nuxt}`));
-        this.isNuxtApp = true;
+        this._isNuxtApp = true;
       } else
       if (packageJson &&
       packageJson.dependencies &&
       packageJson.dependencies.vue) {
         console.log(this.chalk.green(`vue ${packageJson.dependencies.vue}`));
-        this.isVueApp = true;
+        this._isVueApp = true;
       } else
       {
         this.alerts.cantFindNuxtOrVue();
-        this.isNuxtApp = false;
+        this._isNuxtApp = false;
+        this._isVueApp = false;
       }
     }
     catch (e) {

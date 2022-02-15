@@ -23,7 +23,7 @@ const settings = new Settings()
 const config = new Config(_inquirer, chalk, settings)
 const components = new Components(logs, chalk, settings)
 const pages = new Pages(chalk, settings)
-const commands = new Commands(status, settings, components, pages, config)
+const commands = new Commands(status, settings, components, pages, config, logs)
 const shell = new Shell(Yargs, chalk, commands)
 
 export default shell

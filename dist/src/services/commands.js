@@ -1,10 +1,11 @@
 export default class Commands {
-  constructor(status, settings, generateComponents, generatePages, configGenerator) {
+  constructor(status, settings, generateComponents, generatePages, configGenerator, alerts) {
     this.status = status;
     this.settings = settings;
     this.generateComponents = generateComponents;
     this.generatePages = generatePages;
     this.configGenerator = configGenerator;
+    this.alerts = alerts;
   }
   async health(init) {
     await this.status.checkNuxtOrVue();
@@ -29,6 +30,12 @@ export default class Commands {
     } else
     {
       await this.configGenerator.promtUser();
+    }
+  }
+  async placeholder() {
+    await this.health();
+    if (this.status.isNuxtApp || this.status.isVueApp) {
+      this.alerts.initInstruction();
     }
   }}
 

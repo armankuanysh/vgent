@@ -4,7 +4,6 @@ import { ICommands } from 'types/commands'
 import { options } from './options.js'
 import { IShell } from 'types/shell'
 import { componentType, pageType } from 'types/generator.js'
-import { log } from 'console'
 
 export default class Shell implements IShell {
   constructor(
@@ -20,6 +19,9 @@ export default class Shell implements IShell {
           'vgent'
         )} is boilerplate file generator for Nuxt.js and Vue.js`
       )
+      .command('$0', '', {}, async () => {
+        await this.commands.placeholder()
+      })
       .command(
         'health',
         'Check project',
@@ -33,6 +35,9 @@ export default class Shell implements IShell {
         'Used for some generations',
         () => {},
         async (options) => {
+          if (!options.c && !options.p) {
+            await this.commands.placeholder()
+          }
           if (options.c) {
             const name = options.c as string
             const type = ((options.a && 'atoms') ||
