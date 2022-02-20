@@ -47,9 +47,9 @@ export default class Components extends Core implements IGenerator {
         }
         await writeFile(path, boilerplate, { encoding: 'utf8' })
         console.log(
-          `The component ${this.chalk.green(
-            indexed
-          )} has successfully generated!`
+          `The component ${
+            this.atomic ? this.chalk.green(`${type}/`) : ''
+          }${this.chalk.green(indexed)} has successfully generated!`
         )
       } else {
         return

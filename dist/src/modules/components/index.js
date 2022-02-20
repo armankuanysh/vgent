@@ -24,7 +24,7 @@ export default class Components extends Core {
           await mkdir(_dirname, { recursive: true });
         }
         await writeFile(path, boilerplate, { encoding: 'utf8' });
-        console.log(`The component ${this.chalk.green(indexed)} has successfully generated!`);
+        console.log(`The component ${this.atomic ? this.chalk.green(`${type}/`) : ''}${this.chalk.green(indexed)} has successfully generated!`);
       } else
       {
         return;
