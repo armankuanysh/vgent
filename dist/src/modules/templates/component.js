@@ -1,16 +1,16 @@
 export const template = `<template></template>`;
 export const scriptOptionsApi = (lang, name) => `<script lang="${lang}">
-${lang === 'ts' && `import Vue from 'vue'`}
-export default ${lang === 'ts' && `Vue.extend(`}{
+${lang === 'ts' ? `import Vue from 'vue'` : ''}
+export default ${lang === 'ts' ? `Vue.extend(` : ''}{
   name: '${name}',
-	components: {},
+  components: {},
   props: {},
   data() {
     return {}
   },
   computed: {},
   methods: {},
-}${lang === 'ts' && `)`}
+}${lang === 'ts' ? `)` : ''}
 </script>`;
 export const scriptClass = (lang, name) => `<script lang="${lang}">
 import { Component, Vue } from 'vue-property-decorator'

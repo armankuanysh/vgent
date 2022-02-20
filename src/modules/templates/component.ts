@@ -6,17 +6,17 @@ export const scriptOptionsApi = (
   lang: scriptLang,
   name: string
 ) => `<script lang="${lang}">
-${lang === 'ts' && `import Vue from 'vue'`}
-export default ${lang === 'ts' && `Vue.extend(`}{
+${lang === 'ts' ? `import Vue from 'vue'` : ''}
+export default ${lang === 'ts' ? `Vue.extend(` : ''}{
   name: '${name}',
-	components: {},
+  components: {},
   props: {},
   data() {
     return {}
   },
   computed: {},
   methods: {},
-}${lang === 'ts' && `)`}
+}${lang === 'ts' ? `)` : ''}
 </script>`
 
 export const scriptClass = (
